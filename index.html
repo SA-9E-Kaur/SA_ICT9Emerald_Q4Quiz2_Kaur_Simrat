@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+   <title>Grade Average Calculator</title>
+   <style>
+      /* Global Styles */
+      body {
+         font-family: 'Arial', sans-serif;
+         background-color: #f1f8fb; /* Pastel Blue */
+         margin: 0;
+         padding: 0;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         height: 100vh;
+      }
+
+      /* Main Container */
+      .container {
+         background-color: #ffffff;
+         width: 100%;
+         max-width: 600px;
+         padding: 30px;
+         border-radius: 10px;
+         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+         text-align: center;
+         border: 1px solid #d1e3f4; /* Light border */
+      }
+
+      h1 {
+         color: #4f81bd; /* Pastel Blue */
+         font-size: 36px;
+         font-weight: 700;
+         margin-bottom: 30px;
+      }
+
+      /* Button Styles */
+      .btn-custom {
+         background-color: #88d8b0; /* Pastel Green */
+         color: white;
+         padding: 12px 25px;
+         font-size: 18px;
+         border-radius: 25px;
+         border: none;
+         cursor: pointer;
+         transition: background-color 0.3s ease;
+      }
+
+      .btn-custom:hover {
+         background-color: #7cbfa7; /* Darker Pastel Green */
+      }
+
+      .btn-custom:active {
+         background-color: #6da893; /* Even darker green */
+      }
+
+      /* Input Fields Styling */
+      .grade-input {
+         width: 100%;
+         padding: 15px;
+         font-size: 16px;
+         margin: 15px 0;
+         border: 2px solid #88d8b0; /* Pastel Green Border */
+         border-radius: 10px;
+         background-color: #f5fdf8; /* Pastel Light Green */
+         transition: border-color 0.3s ease;
+      }
+
+      .grade-input:focus {
+         border-color: #6da893; /* Darker Pastel Green */
+         outline: none;
+      }
+
+      /* Result Section */
+      .result {
+         margin-top: 30px;
+         font-size: 20px;
+         padding: 20px;
+         background-color: #e0f8f1; /* Light Pastel Green */
+         border-radius: 10px;
+         color: #388e3c; /* Pastel Green Text */
+         font-weight: 700;
+         text-align: center;
+         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Instructions Section */
+      .instructions {
+         font-size: 16px;
+         color: #888;
+         margin-top: 10px;
+         font-style: italic;
+      }
+
+      details summary {
+         font-size: 18px;
+         color: #4f81bd; /* Pastel Blue */
+         cursor: pointer;
+         font-weight: bold;
+         margin-bottom: 10px;
+      }
+
+      details[open] summary {
+         color: #3c6b95; /* Slightly darker pastel blue */
+      }
+
+   </style>
+</head>
+<body>
+
+   <div class="container">
+      <h1>Grade Average Calculator</h1>
+
+      <!-- Instructions Section -->
+      <details ontoggle="showInstructions()">
+         <summary>Click Me for Instructions</summary>
+         <p id="instructions" class="instructions"></p>
+      </details>
+
+      <!-- Grade Input Form -->
+      <form id="gradeForm">
+         <label for="filipino">Filipino:</label>
+         <input type="number" id="filipino" class="grade-input" placeholder="Enter Filipino grade" required>
+
+         <label for="english">English:</label>
+         <input type="number" id="english" class="grade-input" placeholder="Enter English grade" required>
+
+         <label for="science">Science:</label>
+         <input type="number" id="science" class="grade-input" placeholder="Enter Science grade" required>
+
+         <label for="math">Math:</label>
+         <input type="number" id="math" class="grade-input" placeholder="Enter Math grade" required>
+
+         <label for="socialStudies">Social Studies:</label>
+         <input type="number" id="socialStudies" class="grade-input" placeholder="Enter Social Studies grade" required>
+
+         <!-- Submit Button -->
+         <button type="button" class="btn-custom" onclick="calculateAverage()">Get Rating</button>
+      </form>
+
+      <!-- Result Section -->
+      <div id="result" class="result"></div>
+   </div>
+
+   <script>
+      function showInstructions() {
+         document.getElementById("instructions").innerHTML = 
+         "Enter your grades for Filipino, English, Science, Math, and Social Studies. Afterward, click 'Get Rating' to calculate your average grade and receive a rating!";
+      }
+
+      function calculateAverage() {
+         // Get values from the input fields
+         const filipino = parseFloat(document.getElementById("filipino").value);
+         const english = parseFloat(document.getElementById("english").value);
+         const science = parseFloat(document.getElementById("science").value);
+         const math = parseFloat(document.getElementById("math").value);
+         const socialStudies = parseFloat(document.getElementById("socialStudies").value);
+
+         // Calculate average
+         const average = (filipino + english + science + math + socialStudies) / 5;
+
+         // Determine rating based on average
+         let rating = "";
+         if (average >= 94 && average <= 100) {
+            rating = "Excellent";
+         } else if (average >= 87 && average < 94) {
+            rating = "Above Satisfactory";
+         } else if (average >= 80 && average < 87) {
+            rating = "Satisfactory";
+         } else if (average >= 75 && average < 80) {
+            rating = "Needs Improvement";
+         } else if (average >= 70 && average < 75) {
+            rating = "Poor";
+         } else {
+            rating = "Failing. Study harder.";
+         }
+
+         // Display result
+         document.getElementById("result").innerHTML = 
+         `Your average grade is: <strong>${average.toFixed(2)}</strong><br>Rating: <strong>${rating}</strong>`;
+      }
+   </script>
+
+</body>
+</html>
+
+
+
+
+
+
